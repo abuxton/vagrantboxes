@@ -6,36 +6,43 @@
 #
 # Document parameters here.
 #
-# [*sample_parameter*]
-#   Explanation of what this parameter affects and what it defaults to.
-#   e.g. "Specify one or more upstream ntp servers as an array."
+# [*force*]
 #
 # === Variables
 #
 # Here you should define a list of variables that this module would require.
 #
-# [*sample_variable*]
-#   Explanation of how this variable affects the funtion of this class and if
-#   it has a default. e.g. "The parameter enc_ntp_servers must be set by the
-#   External Node Classifier as a comma separated list of hostnames." (Note,
-#   global variables should be avoided in favor of class parameters as
-#   of Puppet 2.6.)
+# [*force*] default true
+# whether to move the files around regadless of vagrent being installed. 
+# Module currently will not fail if no vagrant installed 
 #
 # === Examples
 #
 #  class { vagrantboxes:
-#    servers => [ 'pool.ntp.org', 'ntp.local.company.com' ],
+#    path => '/tmp/vagrantpath/'
 #  }
 #
 # === Authors
 #
-# Author Name <author@domain.com>
+# Author Name <adam.buxton@puppetlabs.com>
 #
 # === Copyright
 #
-# Copyright 2014 Your name here, unless otherwise noted.
+# Copyright 2014 Your adam buxton, unless otherwise noted.
 #
-class vagrantboxes {
+class vagrantboxes(
+  $vagrantpath  = vagrantboxes::params::vagrantpath,
+  $sourcefile   = vagrantboxes::params::sourcefile,
+  $sourcedir    = vagrantboxes::params::sourcepath,
+  $force        = vagrantboxes::params::force,
+)inherits vagrantboxes::params {
+
+
+file {'vagrantfile':
+  path    =>  "${vagrantpath}",
+  source  =>  "${sourcedir}/{$sourcefile}",
+  ensure  =>  "present", #later may variabalise lets get it working first
+ }
 
 
 }
