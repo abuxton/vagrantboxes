@@ -1,6 +1,19 @@
 vagrantboxes
+============
 
-This is the vagrantboxes module.
+The vagrantboxes module is written to be used as a tool to set up various Vagrantfile configs either from a seperat repo or stored within the file repo
+
+The intention of this module is not to install Vagrant, and as such it will not suggest a fixed dependancy on vagrant until such time Puppetlabs make a supported Vagrant module.
+
+The intention of this module is to provide a hook to puppet apply to role out you Vagrantfile config.
+
+Usage
+-----
+ puppet apply -e "include class vagrantnboxes{ vagrantfile => 'some name'}"
+
+
+To facilitate this a example Vagrantbox file is provided.
+
 
 License
 -------
